@@ -1,0 +1,116 @@
+
+<!-- Il documento è stato modificato introducendo anche un controllo su quando l'utente esce dalla casella di testa CAP. -->
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script type="text/javascript" src="esercizi.js"></script>
+
+        <script type="text/javascript">
+            // console.log(this);
+
+        </script>
+    </head>
+    <body>
+        <!-- <h1 id="ciao">ciao</h1>
+        <h1></h1>
+
+
+        <div id="div1">
+          <p id="p1">This is a paragraph.</p>
+          <p id="p2">This is another paragraph.</p>
+        </div> -->
+
+
+        <form action="" method="post" name="eseform">
+        cognome e nome:
+        <input onkeyup="solKeyPressed(this)" type="text" name="nome" size="50" maxlength="50">
+        <br>
+        sesso:
+        <input type="radio" name="sesso" value="M">M
+        <input type="radio" name="sesso" value="F">F
+        <br>
+        ateneo:
+        <select name="ateneo">
+            <option value="nessuno" selected></option>
+            <option value="sapienza">La Sapienza</option>
+            <option value="torvergata">Tor Vergata</option>
+            <option value="romatre">Roma Tre</option>
+        </select>
+        <br>
+        CAP:
+        <input onkeyup="solKeyPressed(this)" onBlur="exitCap(this)" type="text" name="cap" size="5" maxlength="5">
+        <br>
+        sono uno studente lavoratore
+        <input type="checkbox" name="lavoratore">
+        <br>
+        descrizione lavoro:
+        <input type="text" name="descr" size="80" maxlength="80">
+        <br>
+        <br>
+        <button onclick="solEsercizio2()" type="button" >invia</button>
+        <input type="reset" value="Reset">
+        </form>
+    </body>
+</html>
+
+<!--
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <form action="" method="post" name="registr">
+            cognome:
+            <input type="text" name="cognome" size="40" maxlength="40">
+            <br>
+            nome:
+            <input type="text" name="nome" size="30" maxlength="30">
+            <br>
+            matricola:
+            <input type="text" name="matricola" size="12" maxlength="12">
+            <br>
+            regione:
+            <select name="regione">
+                <option value="nessuna" selected></option>
+                <option value="valdaosta">Val d’Aosta</option>
+                <option value="piemonte">Piemonte</option>
+                <option value="liguria">Liguria</option>
+                <option value="lombardia">Lombardia</option>
+                <option value="veneto">Veneto</option>
+                <option value="trentino">Trentino Alto Adige</option>
+                <option value="friuli">Friuli Venezia-Giulia</option>
+                <option value="emilia">Emilia-Romagna</option>
+                <option value="toscana">Toscana</option>
+                <option value="marche">Marche</option>
+                <option value="umbria">Umbria</option>
+                <option value="lazio">Lazio</option>
+                <option value="abruzzo">Abruzzo</option>
+                <option value="molise">Molise</option>
+                <option value="campania">Campania</option>
+                <option value="basilicata">Basilicata</option>
+                <option value="puglia">Puglia</option>
+                <option value="calabria">Calabria</option>
+                <option value="sicilia">Sicilia</option>
+                <option value="sardegna">Sardegna</option>
+            </select>
+
+            <br>
+            email:
+            <input type="text" name="email" size="30" maxlength="30">
+            <br>
+            telefono:
+            <input type="text" name="tel" size="15" maxlength="15">
+            <br>
+            richieste particolari:
+            <br>
+            <textarea name="richieste" cols="60" rows="12"></textarea>
+            <br>
+            <button onclick="solEsercizio1()" type="button">Invia</button>
+            <input type="reset" value="Reset">
+        </form>
+    </body>
+</html> -->

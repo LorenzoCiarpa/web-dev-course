@@ -1,0 +1,124 @@
+
+/*selettore universale*/
+*{
+    /* background-color: blue; */
+}
+
+/*selettore tag name*/
+span{
+
+    /* background: red; */
+}
+
+
+
+/*selettore di classe*/
+.container{
+    /* background: red;
+    font-size: 40px; */
+}
+
+/*selettore di id*/
+#prova{
+    /* background: red;
+    font-size: 20px; */
+}
+
+/*selettore di classi padre-discendente*/
+.container .wrapper{
+    /* background: blue;
+    color:red; */
+}
+
+/*due classi in sequenza*/
+.wrapper{
+    /* background: red;
+    color: blue; */
+}
+/*due classi in sequenza*/
+.wrapper{
+    /* background: yellow;
+    color: blue; */
+}
+
+
+/* selettore di tag-classe  */
+ol.wrapper{
+    /* background: red;
+    color: blue; */
+}
+
+/* selettore di tag-classe  */
+li.wrapper{
+    /* background: grey; */
+}
+
+.item{
+    /* background: black;
+    color: white; */
+}
+
+/* selettore classe-classe */
+.item.wrapper{ 
+    /* background: purple; */
+}
+
+/* selettore classi padre-figlio */
+.wrap .wrapper{
+    /* background: pink; */
+}
+
+
+/* assegnazione attributi a 2 classi insieme */
+li.item, .wrapper, table{
+        /* background: black;
+        color: white;*/
+} 
+
+/* selettore di tag-classe padre figlio */
+ul .wrapper{
+    /* background: green; */
+}
+p{
+    /* color:yellow; */
+}
+p:hover{
+    /* color: blue; */
+}
+
+p::first-letter{
+    /* color: yellow; */
+}
+
+body p{
+    /* color: red; */
+}
+
+body > p{
+    /* color: red; */
+}
+
+h6 + p{
+    /* color:red; */
+}
+
+h6 ~ p{
+    color:red;
+}
+
+/* selettore tags padre-figlio e tag-classe */
+div ul li.item{
+    background: pink;
+}
+
+.wrapper[cellpadding="2"]{
+    background-color: black;
+}
+
+table[cellpadding="2"]{
+    /* background-color: black; */
+}
+
+[cellpadding="2"]{
+    /* background-color: black; */
+}

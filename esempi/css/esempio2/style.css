@@ -1,0 +1,87 @@
+*{
+	
+}
+
+body{
+	background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.1));
+}
+
+div.grid-container{
+	background: #ffffff;
+	display: grid;
+	grid-template-columns: auto auto auto auto;
+	grid-template-rows: auto auto;
+
+}
+
+.grid-item{
+	background-color: green;
+	font-size: 25px;
+	color:black;
+	text-align: center;
+	width: 50px;
+	line-height: 20px;
+	margin: 30;
+
+}
+
+.grid-item:hover{
+	transform: translate(50px,30px);
+}
+
+.arco-container{
+	width: 100%;
+	height: 100px;
+	position: relative;
+}
+
+#button-arco{
+	height: 80px;
+	width: 100px;
+	border-width: 0px;
+	margin: 20px 0px 20px 0px;
+	background: white;
+	position: absolute;
+	animation-name: arcobaleno;
+	animation-duration: 10s;
+	animation-timing-function: linear;
+	animation-iteration-count: 3;
+
+}
+
+@keyframes arcobaleno {
+	0% {
+		background: pink;
+		transform: translateX(40%);
+	}
+
+	17%{
+		background: purple;
+		transform: translateX(100%);
+	}
+
+	34%{
+		background: blue;
+		transform: translateX(60%);
+	}
+
+	51%{
+		background: green;
+		transform: translateX(80%);
+	}
+
+	68%{
+		background: yellow;
+		transform: translateX(250px);
+	}
+
+	85%{
+		background: orange;
+		transform: translateX(300px);
+	}
+
+	100%{
+		background: red;
+		transform: translateX(600px);
+	}
+}
