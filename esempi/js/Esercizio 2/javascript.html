@@ -1,0 +1,71 @@
+<!--
+(a1) verifica che il cognome e nome contenga almeno 5 caratteri. Questa verifica va fatta ogni volta che l’utente cambia il
+valore del campo cognome e nome, e quando esce dalla casella di testo;
+
+(a2) verifica che sia stato selezionata un corso di Laurea. Questa verifica va fatta all’atto dell’invio della form;
+
+(a3) verifica che, se il tipo di laurea selezionato `e T, allora l’anno di corso sia un numero compreso tra 1 e 3 oppure
+sia la stringa “FC”, e se il tipo di laurea selezionato `e M, allora l’anno di corso sia un numero compreso tra 4 e 5
+oppure sia la stringa “FC”. Questa verifica va fatta ogni volta che l’utente cambia o il valore del campo anno di corso
+o il valore del campo tipo di Laurea;
+
+(a4) verifica che, se il corso di laurea selezionato `e IngInfAut, allora o la matricola o l’email sono non vuoti. Questa verifica
+va fatta ogni volta che cambia il corso di laurea selezionato. Basta che una dei due tra matricola e email siano non vuoti-->
+
+<!-- SUGGERIMENTO:
+Per inserire il gestore di eventi sul cambio di scelta su un menu a tendina usare l'evento onchange(già inerito nel tag).
+Per inserire il gestore di eventi sull'uscita da una casella di testo, usare l'evento onblur, (richietsa a1), questo evento viene generato
+quando un utente dopo aver selezionato un campo di testo, clicca poi fuori dal campo di testo. -->
+
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="esercizi.js">
+
+        </script>
+    </head>
+    <body>
+        <form action="" method="post" name="registr" >
+            cognome:
+            <input type="text" onkeyup="checkSurname()" onblur="" name="cognome" size="40" maxlength="40">
+            nome:
+            <input type="text" onkeyup="" onblur="checkName()" name="nome" size="40" maxlength="40">
+            <br/>
+            Corso di Laurea:
+            <select name="corso" onchange="changeCorso()">
+                <option value="nessuna" selected></option>
+                <option value="filosofia">filosofia</option>
+                <option value="matematica">matematica</option>
+                <option value="economia">economia</option>
+                <option value="medicina">medicina</option>
+                <option value="inginfaut">inginfaut</option>
+                <option value="letteratura">letteratura</option>
+            </select>
+            <br>
+            matricola:
+            <input type="text" name="matricola" size="12" maxlength="12">
+            <br/>
+            Tipo di Laurea:
+            <select name="laurea" onchange="tipoCorso()">
+                <option value="triennale" selected>T</option>
+                <option value="magistrale">M</option>
+            </select>
+            <br/>
+            email:
+            <input type="text" name="email" size="30" maxlength="30">
+            <br/>
+            anno di corso:
+            <input type="text" name="anno" size="2" maxlength="2">
+            <br/>
+            richieste particolari:
+            <br/>
+            <textarea name="richieste" cols="60" rows="12"></textarea>
+            <br/>
+
+            <button type="button" onclick="checkInvia()">Invia</button>
+            <input type="reset" value="Reset">
+        </form>
+    </body>
+</html>
