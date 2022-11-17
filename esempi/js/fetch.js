@@ -96,3 +96,36 @@ async function callFetch(url, method, body, headers){
 
     return jsonParsed
 }
+
+// let ball = document.getElementById('button-arco')
+
+// let stile = getComputedStyle(ball)  
+
+// See difference (no value displayed)
+// ball.style.margin
+
+
+// ball.attributes
+// ball.attributes[0]
+// ball.attributes.type
+// ball.getAttribute('type')
+
+// ball.setAttribute('type', 'button')
+// ball.removeAttribute('type')
+
+// ball.className
+// ball.classList
+
+// let container = document.querySelector('div')  first elem
+// let container = document.querySelectorAll('div') all elems
+
+// container.classList.add("className")
+// container.classList.remove("className")
+// container.classList.toggle("className") //se esiste remove else add
+
+
+//Ciclare su un oggetto
+// for(let prop in obj){
+//     console.log(prop)
+//     console.log(obj[prop])
+// }
