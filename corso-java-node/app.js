@@ -3,28 +3,75 @@ const cors = require('cors');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 
+const authRouter = require('./routes/authRouter')
+const peopleRouter = require('./routes/peopleRouter')
 
-//REQUIRE ROUTERS
-const authRouter = require('./routes/authRouter');
-
+  
 //EXPRESS
-const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cors({
+const server = express();
+server.use(express.json());
+server.use(express.urlencoded({ extended: true }));
+server.use(cors({
   origin: '*',
   methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
   credentials: true
 }));
-app.use(cookieParser());
+server.use(cookieParser());
 
-// set the view engine to ejs
-app.set('view engine', 'ejs');
+//ROTTE (rotta base)
+server.use("/auth", authRouter)
 
-//ROUTES
-app.use("/auth", authRouter);
+server.use("/people", peopleRouter)
+
+
+
+// server.get("/api", (req, res, next) => {
+
+//   console.log("Rotta 3")
+
+// })
+
+// server.get("/apiDiversa", (req, res, next) => {
+
+//   console.log("Rotta Diversa")
+
+// })
 
 //SERVER LISTEN
-app.listen(process.env.PORT || 5000, () => {
+server.listen(process.env.PORT || 5000, () => {
     console.log("Server started on port: ", process.env.PORT || 5000);
 });
+
+// let str = '/api'
+
+// function cb(req, res, next){
+
+//   console.log("Rotta 3")
+  
+
+// }
+
+// server.get(str, cb)
+
+// server = {
+//   get: function(str_, myCallback){
+//     myCallback(this.req, this.res, this.next)
+//   },
+
+//   next: function(){
+//     let arr = this.rotte[this.rottaInquestione] //["Rotta 1", "Rotta 2", "Rotta 3"]
+//     let rottaNow = this.rottaAttuale  //0
+    
+//   },
+
+//   rotte:{
+//     "/api": ["Rotta 1", "Rotta 2", "Rotta 3"],
+//     "/apiDiversa": ["apiDiversa"]
+//   },
+
+//   rottaAttuale: 0,
+//   rottaInQuestione: "/api",
+
+//   req: {},
+//   res: {}
+// }

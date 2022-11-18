@@ -1,12 +1,25 @@
 const express = require('express');
-const authController = require('../controllers/authController');
+const peopleController = require('../controllers/peopleController');
 
 const router = express.Router();
 
 
-router.get("/", authController.authControllerOne)
+router.get("/", (req, res, next) => { //"/people" + "/"
+    console.log("Rotta People /")
+    return res.status(200).send("People")
+})
 
-router.get("/test", authController.authControllerTwo)
+router.get("/test", (req, res, next) => { //"/people" + "/test"
+    console.log("Rotta People /test")
+    return res.status(200).send("People test")
+})
+
+router.get("/getPeopleByAge", peopleController.getPeopleByAge)
+
+router.get("/getInfoFromWebsite", peopleController.getInfoFromWebsite)
+
+
+
 
 
 
@@ -19,15 +32,6 @@ router.get("/test", authController.authControllerTwo)
 // router.get("/getHtmlView", authController.getHtmlView);
 
 // router.post("/clearCookies", authController.clearCookies)
-
-
-
-
-
-
-
-
-
 
 
   

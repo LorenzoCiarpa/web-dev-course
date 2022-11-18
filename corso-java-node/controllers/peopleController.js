@@ -1,14 +1,58 @@
 // const jwt = require('jsonwebtoken');
 
+const {PeopleService} = require('../services/peopleService')
 
-const getNormalMessage = (req, res) => {
-    console.log("req.body: ", req.body)
-    console.log("req.query: ", req.query)
-    console.log("req.params: ", req.params)
+let people = [
+    {
+        name: "lorenzo",
+        surname: "ciarpa", 
+        email: "",
+        age: 15
+    },
+    {
+        name: "lorenzo",
+        surname: "ciarpa", 
+        email: "",
+        age: 22
+    },
+    {
+        name: "lorenzo",
+        surname: "ciarpa", 
+        email: "",
+        age: 44
+    },
+    {
+        name: "lorenzo",
+        surname: "ciarpa", 
+        email: "",
+        age: 54
+    }
+]
+
+const getAllPeople = (req, res) => {
     return res.status(200).send('ciao');
 }
 
-const getJson = (req, res) => {
+const getPeopleByAge = async (req, res) => {
+    let age = req.query.age;
+
+    if(age == null || age == undefined){
+        return res.status(401).send("Non hai inserito l'età")
+    }
+
+    let arrayFiltrato = await PeopleService.filtraArray(people, age)
+
+    return res.status(200).json({
+        filteredPeople: arrayFiltrato
+    });
+}
+
+const getPeopleByEmail = (req, res) => {
+
+    return res.status(200).send('ciao');
+}
+
+const setPeople = (req, res) => {
     
 
     let name = req.body.name ? req.body.name : 'defaultname';
@@ -92,7 +136,7 @@ const getJson = (req, res) => {
 
 }
 
-const getHtml = (req, res) => {
+const updatePeople = (req, res) => {
 
     return res
     .status(200)
@@ -112,24 +156,30 @@ const getHtml = (req, res) => {
     )
 }
 
-const getHtmlView = (req, res) => {
+const getInfoFromWebsite = async (req, res) => {
+
+    let name = req.query.name
+    let surname = req.query.surname
+    let email = req.query.email
+
+
+    let info = await PeopleService.getInfoFromWebsite(name, surname, email);
+
+    return res
+    .status(200)
+    .json({
+        info: info
+    });
+}
+
+const deletePeople = (req, res) => {
 
     return res
     .status(200)
     .render('index')
 }
 
-const authControllerOne = (req, res, next) => { //"/api" + "/"
-    console.log("Rotta 1")
-    return res.status(200).send("Rotta 1")
-}
 
-const authControllerTwo = (req, res, next) => { 
-  
-    console.log("Rotta 2")
-    res.status(200).send("Rotta 2")
-    return;
-}
 //installare un middleware to check validità nickname
 
 
@@ -137,10 +187,6 @@ const authControllerTwo = (req, res, next) => {
 
 
 module.exports = {
-    getNormalMessage,
-    getJson,
-    getHtml,
-    getHtmlView,
-    authControllerOne,
-    authControllerTwo
+    getPeopleByAge,
+    getInfoFromWebsite
 };
