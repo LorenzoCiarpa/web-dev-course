@@ -1,8 +1,10 @@
 // const jwt = require('jsonwebtoken');
 // const {AuthService} = require('../services/authService')
+const {CarsQueries} = require('../queries/carsQueries')
 const {AuthQueries} = require('../queries/authQueries')
 const {AuthValidation} = require('../validations/authValidation')
 // const {AuthInterface} = require('../interfaces/authInterface')
+const {CarsInterface} = require('../interfaces/carsInterface')
 
 
 const getNormalMessage = (req, res) => {
@@ -153,6 +155,29 @@ const signUp = async (req, res, next) => {
     //Inserire la getUser (Query) e vedere se l'utente già esiste
     //If exist return error
     //else continue
+    let responseGetUser
+    try{
+        responseGetUser = await AuthQueries.getUser(email);
+    }catch(error){
+        console.log(`Error in AuthQueries.setUser, error: ${error}`)
+        return res
+        .status(401)
+        .json({
+            success: false,
+            errorMessage: "Error in setUser"
+        })
+    }
+
+    if(responseGetUser?.length > 0){
+        console.log(`Error in User already exists`)
+        return res
+        .status(401)
+        .json({
+            success: false,
+            errorMessage: "User already exists"
+        })
+    }
+
     let response
     try{
         response = await AuthQueries.setUser(email, password, username);
@@ -192,7 +217,7 @@ const login = async (req, res, next) => {
 
     let response
     try{
-        response = await AuthQueries.getUser(email, password);
+        response = await AuthQueries.getUserForLogin(email, password);
     }catch(error){
         console.log(`Error in AuthQueries.getUser, error: ${error}`)
         return res
@@ -212,12 +237,29 @@ const login = async (req, res, next) => {
         })
     }
 
+
+    let cars
+    try{
+        cars = await CarsQueries.getCarsByEmail(email);
+    }catch(error){
+        console.log(`Error in CarsQueries.getCarsByEmail, error: ${error}`)
+        return res
+        .status(401)
+        .json({
+            success: false,
+            errorMessage: "Error in getCarsByEmail"
+        })
+    }
+
+    cars = CarsInterface.formatGetCarsForLogin(cars)
+    
     //fare la getCars(email) e filtra creando un array di soli id delle cars
     
     return res
     .status(200)
     .json({
-        success: true
+        success: true,
+        cars
     });
     
 }
@@ -240,7 +282,7 @@ const updatePassword = async (req, res, next) => {
 
     let response
     try{
-        response = await AuthQueries.getUser(email, password);
+        response = await AuthQueries.getUserForLogin(email, password);
     }catch(error){
         console.log(`Error in AuthQueries.getUser, error: ${error}`)
         return res

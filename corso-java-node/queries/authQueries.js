@@ -27,7 +27,31 @@ class AuthQueries {
         });
     }
 
-    static async getUser(email, password) {
+    static async getUser(email) {
+        return new Promise((resolve, reject) => {
+            let sql = `
+                SELECT * 
+                FROM auth
+                WHERE email = ?
+            `;
+
+            mysql.query(sql, [email], (err, rows, fields) => {
+                if (err) {
+                    return reject(new Error(err.message));
+                }
+                if (rows == undefined || rows == null) {
+                    return reject({
+                        message: "undefined"
+                    });
+                } else {
+                    return resolve(JSON.parse(JSON.stringify(rows)));
+                }
+
+            });
+        });
+    }
+
+    static async getUserForLogin(email, password) {
         return new Promise((resolve, reject) => {
             let sql = `
                 SELECT * 
@@ -51,7 +75,7 @@ class AuthQueries {
             });
         });
     }
-
+    
     
     static async updatePassword(email, password, newPassowrd) {
         return new Promise((resolve, reject) => {

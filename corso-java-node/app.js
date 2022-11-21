@@ -23,6 +23,8 @@ server.use("/auth", authRouter)
 
 server.use("/people", peopleRouter)
 
+server.use("/people", peopleRouter)
+
 
 
 // server.get("/people/getAll", (req, res, next) => {

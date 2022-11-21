@@ -20,8 +20,8 @@ SignUp:
 	prima dovete verificare che le password corrispondano, 
 	verifica 8 char len, Maiuscolo, minuscola, numero, char special
 	
-	BE modifica setUser
-	Invocare la getUser per vedere se già esiste l'utente, len array returned
+	//BE modifica setUser
+	//Invocare la getUser per vedere se già esiste l'utente, len array returned
 	
 	
 	
@@ -36,7 +36,7 @@ login:
 	{
 		id
 	}
-	oppure un array di interi, (id di tutte le macchie possedute dall'utente)
+	oppure un array di interi, (id di tutte le macchine possedute dall'utente)
 	
 	dopo che l'array ritorna dal db dovete ciclare su tutto l'array, ed creare 
 	un nuovo array con solo gli id delle macchine
@@ -62,7 +62,7 @@ getCar:
 
 deleteCar:
 
-    /cars/getCar
+    /cars/deleteCar
     input (id)
 
     delete from cars where id = ? 
