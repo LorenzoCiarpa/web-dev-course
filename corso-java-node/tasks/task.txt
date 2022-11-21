@@ -1,0 +1,86 @@
+
+1)
+Modulo, 4 campi, email, password, conferma password, username
+
+2 Bottoni
+"SignUp", "login"
+
+SignUp:
+
+	/auth/signUp 
+    input (email, password(hashata), username)
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
+	<script>
+	   var hash = CryptoJS.MD5("Message");
+	   alert(hash);
+	</script>
+	
+	prima dovete verificare che le password corrispondano, 
+	verifica 8 char len, Maiuscolo, minuscola, numero, char special
+	
+	BE modifica setUser
+	Invocare la getUser per vedere se già esiste l'utente, len array returned
+	
+	
+	
+login: 
+
+	/auth/login
+	
+	input (email, password)
+	
+	BE modificare login,
+	invece che ritornare la success: true, dobbiamo ritornare un array, o di oggetti:
+	{
+		id
+	}
+	oppure un array di interi, (id di tutte le macchie possedute dall'utente)
+	
+	dopo che l'array ritorna dal db dovete ciclare su tutto l'array, ed creare 
+	un nuovo array con solo gli id delle macchine
+	
+	npx json-server --watch data/db.json --port 8000
+	
+	FE)
+	Accanto/sotto gli id ci devono essere una serie di bottoni
+	2 bottoni
+	getCar, deleteCar
+	
+getCar:
+	/cars/getCar 
+
+    input (id)
+
+	Select * from cars where id = ? 
+    
+    [id]
+	
+
+	
+
+deleteCar:
+
+    /cars/getCar
+    input (id)
+
+    delete from cars where id = ? 
+    
+    [id]
+
+FE)
+form con 3 campi: nome, marca, anno_immatricolazione
+
+	/cars/createCar
+	
+	input (email, nome, marca, anno)
+	
+	INSERT INTO cars
+		(nome, marca, anno_immatricolazione, proprietario)
+	VALUES
+		(?, ?, ?, ?)
+		
+	[nome, marca, anno_immatricolazione, email]
+	
+	

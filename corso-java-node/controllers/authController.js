@@ -150,7 +150,9 @@ const signUp = async (req, res, next) => {
             errorMessage: "Error in validate input"
         })
     }
-
+    //Inserire la getUser (Query) e vedere se l'utente già esiste
+    //If exist return error
+    //else continue
     let response
     try{
         response = await AuthQueries.setUser(email, password, username);
@@ -210,6 +212,7 @@ const login = async (req, res, next) => {
         })
     }
 
+    //fare la getCars(email) e filtra creando un array di soli id delle cars
     
     return res
     .status(200)
