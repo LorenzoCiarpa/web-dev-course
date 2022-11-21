@@ -1,4 +1,8 @@
 // const jwt = require('jsonwebtoken');
+// const {AuthService} = require('../services/authService')
+const {AuthQueries} = require('../queries/authQueries')
+const {AuthValidation} = require('../validations/authValidation')
+// const {AuthInterface} = require('../interfaces/authInterface')
 
 
 const getNormalMessage = (req, res) => {
@@ -124,14 +128,211 @@ const authControllerOne = (req, res, next) => { //"/api" + "/"
     return res.status(200).send("Rotta 1")
 }
 
-const authControllerTwo = (req, res, next) => { 
+const authControllerTwo = async (req, res, next) => { 
   
     console.log("Rotta 2")
     res.status(200).send("Rotta 2")
     return;
 }
 //installare un middleware to check validità nickname
+const signUp = async (req, res, next) => { 
+    //Dati input
+    let email = req.body.email;
+    let password = req.body.password;
+    let username = req.body.username;
 
+    //Validazione
+    if(!AuthValidation.validateSignUp(email, username)){
+        return res
+        .status(401)
+        .json({
+            success: false,
+            errorMessage: "Error in validate input"
+        })
+    }
+
+    let response
+    try{
+        response = await AuthQueries.setUser(email, password, username);
+    }catch(error){
+        console.log(`Error in AuthQueries.setUser, error: ${error}`)
+        return res
+        .status(401)
+        .json({
+            success: false,
+            errorMessage: "Error in setUser"
+        })
+    }
+
+    
+    return res
+    .status(200)
+    .json({
+        success: true
+    });
+    
+}
+
+const login = async (req, res, next) => { 
+    //Dati input
+    let email = req.body.email;
+    let password = req.body.password;
+
+    //Validazione
+    if(!AuthValidation.validateSignUp(email)){
+        return res
+        .status(401)
+        .json({
+            success: false,
+            errorMessage: "Error in validate input"
+        })
+    }
+
+    let response
+    try{
+        response = await AuthQueries.getUser(email, password);
+    }catch(error){
+        console.log(`Error in AuthQueries.getUser, error: ${error}`)
+        return res
+        .status(401)
+        .json({
+            success: false,
+            errorMessage: "Error in getUser"
+        })
+    }
+
+    if(response.length == 0){
+        return res
+        .status(200)
+        .json({
+            success: false,
+            errorMessage: "User non è registrato"
+        })
+    }
+
+    
+    return res
+    .status(200)
+    .json({
+        success: true
+    });
+    
+}
+
+const updatePassword = async (req, res, next) => { 
+    //Dati input
+    let email = req.body.email;
+    let password = req.body.password;
+    let newPassword = req.body.newPassword;
+
+    //Validazione
+    if(!AuthValidation.validateSignUp(email)){
+        return res
+        .status(401)
+        .json({
+            success: false,
+            errorMessage: "Error in validate input"
+        })
+    }
+
+    let response
+    try{
+        response = await AuthQueries.getUser(email, password);
+    }catch(error){
+        console.log(`Error in AuthQueries.getUser, error: ${error}`)
+        return res
+        .status(401)
+        .json({
+            success: false,
+            errorMessage: "Error in getUser"
+        })
+    }
+
+    if(response.length == 0){
+        return res
+        .status(200)
+        .json({
+            success: false,
+            errorMessage: "User non è registrato"
+        })
+    }
+
+    let updateResponse
+    try{
+        updateResponse = await AuthQueries.updatePassword(email, password, newPassword);
+    }catch(error){
+        console.log(`Error in AuthQueries.updatePassword, error: ${error}`)
+        return res
+        .status(401)
+        .json({
+            success: false,
+            errorMessage: "Error in updatePassword"
+        })
+    }
+    
+    return res
+    .status(200)
+    .json({
+        success: true
+    });
+    
+}
+
+const deleteUser = async (req, res, next) => { 
+    //Dati input
+    let email = req.body.email;
+    let password = req.body.password;
+
+    //Validazione
+    if(!AuthValidation.validateSignUp(email)){
+        return res
+        .status(401)
+        .json({
+            success: false,
+            errorMessage: "Error in validate input"
+        })
+    }
+
+    let response
+    try{
+        response = await AuthQueries.deleteUser(email, password);
+    }catch(error){
+        console.log(`Error in AuthQueries.deleteUser, error: ${error}`)
+        return res
+        .status(401)
+        .json({
+            success: false,
+            errorMessage: "Error in deleteUser"
+        })
+    }
+
+    console.log(response)
+
+    if(response.affectedRows == 0){
+        return res
+        .status(200)
+        .json({
+            success: false,
+            errorMessage: "User non è stato cancellato"
+        })
+    }
+    
+    return res
+    .status(200)
+    .json({
+        success: true
+    });
+    
+}
+
+
+const handleResponse = (req, res) => {
+    let response = req.locals;
+
+    return res
+    .status(response.status)
+    .json(response.data)
+}
 
 
 
@@ -142,5 +343,10 @@ module.exports = {
     getHtml,
     getHtmlView,
     authControllerOne,
-    authControllerTwo
+    authControllerTwo,
+    handleResponse,
+    signUp,
+    login,
+    updatePassword,
+    deleteUser
 };

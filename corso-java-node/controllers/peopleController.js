@@ -1,36 +1,56 @@
 // const jwt = require('jsonwebtoken');
 
 const {PeopleService} = require('../services/peopleService')
+const {PeopleQueries} = require('../queries/peopleQueries')
+const {PeopleValidation} = require('../validations/peopleValidation')
+const {PeopleInterface} = require('../interfaces/peopleInterface')
 
-let people = [
-    {
-        name: "lorenzo",
-        surname: "ciarpa", 
-        email: "",
-        age: 15
-    },
-    {
-        name: "lorenzo",
-        surname: "ciarpa", 
-        email: "",
-        age: 22
-    },
-    {
-        name: "lorenzo",
-        surname: "ciarpa", 
-        email: "",
-        age: 44
-    },
-    {
-        name: "lorenzo",
-        surname: "ciarpa", 
-        email: "",
-        age: 54
+// let people = [
+//     {
+//         name: "lorenzo",
+//         surname: "ciarpa", 
+//         email: "",
+//         age: 15
+//     },
+//     {
+//         name: "lorenzo",
+//         surname: "ciarpa", 
+//         email: "",
+//         age: 22
+//     },
+//     {
+//         name: "lorenzo",
+//         surname: "ciarpa", 
+//         email: "",
+//         age: 44
+//     },
+//     {
+//         name: "lorenzo",
+//         surname: "ciarpa", 
+//         email: "",
+//         age: 54
+//     }
+// ]
+
+const getAllPeople = async (req, res) => {
+    let people
+    try{
+        people = await PeopleQueries.getPeopleAllPeople();
+    }catch(error){
+        console.log("error in getAllPeople", error)
     }
-]
 
-const getAllPeople = (req, res) => {
-    return res.status(200).send('ciao');
+
+    people = PeopleInterface.formatGetAllPeople(people)
+
+    return res
+    .status(200)
+    .json({
+        success: true,
+        data: {
+            people
+        }
+    });
 }
 
 const getPeopleByAge = async (req, res) => {
@@ -52,86 +72,66 @@ const getPeopleByEmail = (req, res) => {
     return res.status(200).send('ciao');
 }
 
-const setPeople = (req, res) => {
-    
-
-    let name = req.body.name ? req.body.name : 'defaultname';
-    let surname = req.body.surname ? req.body.surname : 'defaultsurname';
-    let email = req.body.email ? req.body.email : 'defaultEmail@gmail.com';
-
-    let body = req.body;
-    let query = req.query;
-    let params = req.params;
+const setPeople = async (req, res) => {
 
 
+    // let body = req.body;
+    // let query = req.query;
+    // let params = req.params;
 
-    console.log("input: ",name, surname, email)
+    //Validazione alle variabili in input
+    let email = req.body.email;
+    let name = req.body.name;
+    let surname = req.body.surname;
+    let city = req.body.city;
+    // let age = req.body.age;
 
-    let regexLogged = /^[aeiouAEIOU]*$/
-    let regexName = /^[a-zA-Z]*$/
-    let regexEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    console.log("input: ",name, surname, email, city)
 
-    if(!regexName.test(name)){
+    if(!PeopleValidation.validateSetPeople(email, name, surname, city)){
         return res
         .status(401)
         .json({
             success: false,
-            error: {
-                errorMessage: `Your name is not correct`,
+            error:{
+                errorMessage: "Erroe in in input"
             }
         });
-    
     }
 
-    if(!regexName.test(surname)){
+    
+
+    //Logica
+    let response
+    try{
+        response = await PeopleService.setPeople(email, name, surname, city)
+    }catch(error){
+        console.log("Error in setPerson")
         return res
         .status(401)
         .json({
             success: false,
-            error: {
-                errorMessage: `Your surname is not correct`,
+            error:{
+                 errorMessage: "Error in service.setPerson"
             }
-        });
-    
+        })
     }
+    
+    console.log(response)
 
-    if(!regexEmail.test(email)){
+    // PeopleInterface.setFormaSetPerson();
+    
+    if(!response.success){
         return res
         .status(401)
-        .json({
-            success: false,
-            error: {
-                errorMessage: `Your email is not correct`,
-            }
-        });
-    
+        .json(response);
     }
 
-    if(regexLogged.test(name[0])){
-        return res
-        .status(200)
-        .json({
-            success: true,
-            data: {
-                name,
-                surname,
-                email,
-                logged: true
-            }
-        });
-    }
+    //Formattazione (Interface)
 
     return res
     .status(200)
-    .json({
-        success: true,
-        data: {
-            name,
-            surname,
-            email,
-            logged: false
-        }
-    });
+    .json(response);
     
 
 }
@@ -179,6 +179,15 @@ const deletePeople = (req, res) => {
     .render('index')
 }
 
+async function handleSet(req, res, next){
+
+    console.log("Rotta 3")
+    res
+    .status(200)
+    .send("Rotta 3")
+
+    return;
+}
 
 //installare un middleware to check validità nickname
 
@@ -187,6 +196,9 @@ const deletePeople = (req, res) => {
 
 
 module.exports = {
+    getAllPeople,
     getPeopleByAge,
-    getInfoFromWebsite
+    getInfoFromWebsite,
+    handleSet,
+    setPeople
 };

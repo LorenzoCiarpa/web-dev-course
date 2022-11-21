@@ -1,28 +1,36 @@
-const {mysql} = require('../config/databaseConfig');
 
-class PeopleQueries {
+class PeopleValidation {
     
-    static async getPeopleAllPeople() {
-        return new Promise((resolve, reject) => {
-            let sql = `
-                SELECT *
-                FROM people;
-            `;
+    static validateSetPeople(email, name, surname, city) {
+        let regexLogged = /^[aeiouAEIOU]*$/
+        let regexName = /^[a-zA-Z]*$/
+        let regexCity = /^[a-zA-Z ]*$/
+        let regexEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
-            mysql.query(sql, [], (err, rows, fields) => {
-                if (err) {
-                    return reject(new Error(err.message));
-                }
-                if (rows == undefined || rows == null) {
-                    return reject({
-                        message: "undefined"
-                    });
-                } else {
-                    return resolve(JSON.parse(JSON.stringify(rows)));
-                }
+        
+        if(!regexName.test(name)){
+            return false
+        
+        }
 
-            });
-        });
+        if(!regexName.test(surname)){
+            return false;
+        
+        }
+
+        if(!regexEmail.test(email)){
+            return false;
+        
+        }
+
+        if(!regexCity.test(city)){
+            return false;
+        
+        }
+        return true
+        // if(isNaN(age) && Number(age) < 0){
+        //     return;
+        // }
     }
 
     
@@ -32,30 +40,6 @@ class PeopleQueries {
             let sql = `
                 SELECT *
                 FROM presona
-                WHERE email = ?;
-            `;
-
-            mysql.query(sql, [email], (err, rows, fields) => {
-                if (err) {
-                    return reject(new Error(err.message));
-                }
-                if (rows == undefined || rows == null) {
-                    return reject({
-                        message: "undefined"
-                    });
-                } else {
-                    return resolve(JSON.parse(JSON.stringify(rows)));
-                }
-
-            });
-        });
-    }
-
-    static async getPersonByEmail(email) {
-        return new Promise((resolve, reject) => {
-            let sql = `
-                SELECT *
-                FROM people
                 WHERE email = ?;
             `;
 
@@ -209,4 +193,4 @@ class PeopleQueries {
 
 }
 
-module.exports = { PeopleQueries }
+module.exports = { PeopleValidation }

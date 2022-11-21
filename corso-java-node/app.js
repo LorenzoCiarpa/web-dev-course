@@ -25,16 +25,31 @@ server.use("/people", peopleRouter)
 
 
 
-// server.get("/api", (req, res, next) => {
+// server.get("/people/getAll", (req, res, next) => {
 
-//   console.log("Rotta 3")
+//   console.log("Rotta 1");
+//   next();
 
 // })
 
-// server.get("/apiDiversa", (req, res, next) => {
+// server.get("/people/getBy", (req, res, next) => {
 
-//   console.log("Rotta Diversa")
+//   console.log("Rotta 2")
+//   res
+//   .status(200)
+//   .send("Rotta 2")
 
+//   return;
+// })
+
+// server.get("/people/set", (req, res, next) => {
+
+//   console.log("Rotta 3")
+//   res
+//   .status(200)
+//   .send("Rotta 3")
+
+//   return;
 // })
 
 //SERVER LISTEN

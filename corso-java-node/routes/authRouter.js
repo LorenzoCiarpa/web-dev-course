@@ -4,66 +4,21 @@ const authController = require('../controllers/authController');
 const router = express.Router();
 
 
-router.get("/", authController.authControllerOne)
+router.put("/signUp", authController.signUp)
+// router.put("/signUp", authController.handleResponse)
 
-router.get("/test", authController.authControllerTwo)
+router.post("/login", authController.login)
+// router.post("/login", authController.handleResponse)
 
+router.patch("/updatePassword", authController.updatePassword)
 
+router.delete("/deleteUser", authController.deleteUser)
+// router.patch("/updatePassword", authController.handleResponse)
 
-// router.get("/getMessage/:name/:surname", authController.getNormalMessage);
+// router.get("/getUser", authController.signUp)
+// router.get("/getUser", authController.handleResponse)
 
-// router.post("/getJson", authController.getJson);
-
-// router.get("/getHtml", authController.getHtml);
-
-// router.get("/getHtmlView", authController.getHtmlView);
-
-// router.post("/clearCookies", authController.clearCookies)
-
-
-
-
-
-
-
-
-
-
-
-  
-//   router.post("/api", (req, res, next) => {
-  
-//     console.log("Rotta Post")
-//     res.status(200).send("Rotta Post")
-//     return;
-//   })
-  
-//   router.put("/api", (req, res, next) => {
-  
-//     console.log("Rotta Put")
-//     res.status(200).json({response: "Rotta Put"})
-//     return;
-//   })
-  
-//   router.patch("/api", (req, res, next) => {
-  
-//     console.log("Rotta patch")
-//     res.status(200).json({response: "Rotta patch"})
-//     return;
-//   })
-  
-//   router.delete("/api", (req, res, next) => {
-  
-//     console.log("Rotta Delete")
-//     res.status(200).json({response: "Rotta Delete"})
-//     return;
-//   })
-  
-  
-
-
-
-// router.post("/checkAccountSigned", authController.login);
+router.use(authController.handleResponse)
 
 
 module.exports = router;

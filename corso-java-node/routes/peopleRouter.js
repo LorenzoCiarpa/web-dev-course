@@ -18,9 +18,50 @@ router.get("/getPeopleByAge", peopleController.getPeopleByAge)
 
 router.get("/getInfoFromWebsite", peopleController.getInfoFromWebsite)
 
+router.post("/getAllPeople", peopleController.getAllPeople)
+
+const handleResponse = (req, res) => {
+    let response = req.locals;
+
+    return res
+    .status(response.status)
+    .json(response.data);
+}
+
+router.post("/getAll", (req, res, next) => {
+
+    console.log("Rotta 1");
+    console.log(req.locals);
+
+    req.locals = {
+        status: 401,
+        data: {
+            error: {
+                errorMessage: "Errore nella validazione"
+            }
+        } 
+    }
+
+    if(false) next()
+  
+    return res.json({success: true})
+})
+
+router.post("/getAll", handleResponse)
+  
+router.post("/getBy", (req, res, next) => {
+
+    console.log("Rotta 2")
+    res
+    .status(200)
+    .send("Rotta 2")
+
+    return;
+})
 
 
-
+  
+router.post("/setPeople", peopleController.setPeople);
 
 
 // router.get("/getMessage/:name/:surname", authController.getNormalMessage);
