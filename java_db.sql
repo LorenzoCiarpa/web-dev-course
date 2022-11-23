@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Nov 23, 2022 alle 16:06
+-- Creato il: Nov 23, 2022 alle 16:59
 -- Versione del server: 10.4.21-MariaDB
 -- Versione PHP: 8.0.12
 
@@ -100,7 +100,8 @@ INSERT INTO `corso` (`codice`, `titolo`, `docente`) VALUES
 (1, 'Analisi', 'Alfredo'),
 (2, 'Chimica', 'Giorgio'),
 (3, 'Chimica', 'Giovanni'),
-(4, 'Fisica', 'Luca');
+(4, 'Fisica', 'Luca'),
+(5, 'Geometria', NULL);
 
 -- --------------------------------------------------------
 
@@ -125,7 +126,8 @@ INSERT INTO `esame` (`studente`, `voto`, `corso`) VALUES
 ('8765', 22, 2),
 ('9876', 21, 3),
 ('7890', 26, 2),
-('8901', 28, 3);
+('8901', 28, 3),
+('6554', 30, 3);
 
 -- --------------------------------------------------------
 
@@ -150,6 +152,18 @@ CREATE TABLE `maternita` (
   `madre` varchar(45) DEFAULT NULL,
   `figlio` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dump dei dati per la tabella `maternita`
+--
+
+INSERT INTO `maternita` (`madre`, `figlio`) VALUES
+('francesca', 'lorenzo'),
+('laura', 'andrea'),
+('laura', 'marco'),
+('francesca', 'lorenzo'),
+('francesca', 'luca'),
+('francesca', 'aldo');
 
 -- --------------------------------------------------------
 
@@ -187,6 +201,19 @@ CREATE TABLE `persone` (
   `eta` int(11) DEFAULT NULL,
   `reddito` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dump dei dati per la tabella `persone`
+--
+
+INSERT INTO `persone` (`nome`, `eta`, `reddito`) VALUES
+('lorenzo', 24, 10),
+('luca', 21, 15),
+('francesca', 30, 30),
+('aldo', 12, 11),
+('laura', 70, 50),
+('andrea', 23, 50),
+('marco', 27, 35);
 
 -- --------------------------------------------------------
 
@@ -230,6 +257,7 @@ CREATE TABLE `studente` (
 --
 
 INSERT INTO `studente` (`matricola`, `nome`, `cognome`, `dataNascita`) VALUES
+('10101010', 'marco', 'viola', '03/11/1978'),
 ('1234', 'lorenzo', 'ciarpa', '03/11/1998'),
 ('6554', 'Rossi', 'mario', '05/12/1978'),
 ('7890', 'Giallo', 'Paolo', '03/11/1976'),
@@ -295,7 +323,7 @@ ALTER TABLE `cars`
 -- AUTO_INCREMENT per la tabella `corso`
 --
 ALTER TABLE `corso`
-  MODIFY `codice` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `codice` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT per la tabella `produttori`
