@@ -1,0 +1,5 @@
+host: us-cdbr-east-06.cleardb.net
+user:  bd41dc536e6f14
+pass: 4b494b9d
+db: heroku_95c7dfa1768e978
+port: 3306
