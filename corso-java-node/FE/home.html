@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC="-//W3C//DTD HTML 4.0//EN">
+<HTML>
+	<HEAD>
+		<TITLE>Pagina web di prova </TITLE>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.js"></script>
+
+		<script src="esercizio.js"></script>
+		<link rel="stylesheet" href="./esercizio.css" type="text/css">
+
+	</HEAD>
+	<body>
+		<form action="">
+			<label for="">Email:</label>
+			<input name="email" type="text" value="lorenzo@corso.it">
+			<label name="erroremail" for=""></label>
+			<br>
+			
+
+			<label for="">Username:</label>
+			<input name="username" type="text">
+			<label name="errorusername" for=""></label>
+			<br>
+			
+
+			<label for="">Password:</label>
+			<input name="password" type="password" value="ciao">
+			<label name="errorpassword" for=""></label>
+			<br>
+
+			<label for="">Conferma Password:</label>
+			<input name="password" type="password">
+			<label name="errorpassword" for=""></label>
+			<br>
+
+		</form>
+
+		<button onclick="signUp()">signUp</button>
+		<button onclick="login()">login</button>
+
+		<div id="response"></div>
+
+		<br>
+		<br>
+
+		<form action="">
+			<label for="">Nome:</label>
+			<input name="nome" type="text" value="golf">
+			<label name="errornome" for=""></label>
+			<br>
+			
+
+			<label for="">Marca:</label>
+			<input name="marca" type="text" value="volkswagen">
+			<label name="errormarca" for=""></label>
+			<br>
+			
+
+			<label for="">anno_immatricolazione:</label>
+			<input name="anno" type="text" value="2020">
+			<label name="erroranno" for=""></label>
+			<br>
+			
+			<button type="button" onclick="createCar()">ceateCar</button>
+			<p name="response-create-car"></p>
+			
+		</form>
+
+		
+
+	</body>
+
+</html>

@@ -4,7 +4,11 @@ const carsController = require('../controllers/carsController');
 const router = express.Router();
 
 
-router.put("/getCar", carsController.getCar)
+router.post("/getCar", carsController.getCar)
+
+router.delete("/deleteCar", carsController.deleteCar)
+
+router.post("/createCar", carsController.createCar)
 
 
 

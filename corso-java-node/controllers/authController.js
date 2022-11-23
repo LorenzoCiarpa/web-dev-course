@@ -143,6 +143,8 @@ const signUp = async (req, res, next) => {
     let password = req.body.password;
     let username = req.body.username;
 
+    console.log(req.body)
+
     //Validazione
     if(!AuthValidation.validateSignUp(email, username)){
         return res
@@ -228,7 +230,7 @@ const login = async (req, res, next) => {
         })
     }
 
-    if(response.length == 0){
+    if(!response || response.length == 0){
         return res
         .status(200)
         .json({
@@ -251,7 +253,8 @@ const login = async (req, res, next) => {
         })
     }
 
-    cars = CarsInterface.formatGetCarsForLogin(cars)
+    cars = cars ? cars : [];
+    // cars = CarsInterface.formatGetCarsForLogin(cars)
     
     //fare la getCars(email) e filtra creando un array di soli id delle cars
     

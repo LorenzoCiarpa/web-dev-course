@@ -34,7 +34,11 @@ login:
 	BE modificare login,
 	invece che ritornare la success: true, dobbiamo ritornare un array, o di oggetti:
 	{
-		id
+		id (Car),
+		nome,
+		marca,
+		anno_immatricolazione,
+		email
 	}
 	oppure un array di interi, (id di tutte le macchine possedute dall'utente)
 	

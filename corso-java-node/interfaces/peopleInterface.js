@@ -16,9 +16,6 @@ class PeopleInterface {
 
     
 
-
-    
-
 }
 
 module.exports = { PeopleInterface }

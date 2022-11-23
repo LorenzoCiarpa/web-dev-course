@@ -1,8 +1,23 @@
 
 class Validator {
 
+    static validateInput(...input){
+        for(let i = 0; i < input.length; i++){
+            if(input[i] == undefined || input[i] == null){
+                return false;
+            }
+        }
+    
+        return true;
+    }
+
     static validateName(name){
         let regexName = /^[a-zA-Z]*$/
+        return regexName.test(name);
+    }
+
+    static validateAlphaNumeric(name){
+        let regexName = /^[a-zA-Z0-9]*$/
         return regexName.test(name);
     }
 
