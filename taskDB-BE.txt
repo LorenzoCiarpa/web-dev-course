@@ -1,0 +1,13 @@
+un musicista puo registrarsi inserendo email, nome, password, ruolopreferito
+
+la password puo essere cambiata
+
+un musicista può creare una band (proprietario)
+
+le band possono avere un numero indefinito di musicisti ma un ruolo puo essere ricoperto solo una volta
+
+un musicista può entrare e lasciare una band
+
+il proprietario della band è l'unico che può sciogliere la band.
+
+inoltre per ogni band salvare anche data di creazione e in caso di scioglimento la data
