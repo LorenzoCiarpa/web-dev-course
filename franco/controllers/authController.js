@@ -12,16 +12,6 @@ const signUp = async (req, res, next) => {
     let username = req.body.username;
 
     console.log(req.body)
-
-    //Validazione
-    if(!AuthValidation.validateSignUp(email, username)){
-        return res
-        .status(401)
-        .json({
-            success: false,
-            errorMessage: "Error in validate input"
-        })
-    }
     
     let responseCreateUser
     try{
