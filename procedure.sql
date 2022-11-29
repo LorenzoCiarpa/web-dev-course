@@ -23,8 +23,13 @@ BEGIN
         END WHILE;
         
         
-        
-        select * from corso;
+        if start_index is null then
+			select * from corso;
+		elseif start_index is null then 
+			select * from corso;
+		else 
+			select * from corso;
+        end if;
         
     COMMIT;
 
