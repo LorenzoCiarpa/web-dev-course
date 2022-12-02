@@ -1,0 +1,22 @@
+{
+    "blogs": [
+        { 
+            "title": "Titolo mario", 
+            "body": "lorem", 
+            "author":"mario", 
+            "id": 1
+        },
+        { 
+            "title": "Titolo luigi", 
+            "body": "lorem", 
+            "author":"luigi", 
+            "id": 2
+        },
+        { 
+            "title": "Titolo yoshi", 
+            "body": "lorem", 
+            "author":"lorenzo", 
+            "id": 3
+        }
+    ]
+}
